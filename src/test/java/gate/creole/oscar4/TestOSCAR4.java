@@ -1,11 +1,14 @@
 package gate.creole.oscar4;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
+import gate.Document;
 import gate.Factory;
 import gate.LanguageAnalyser;
-import gate.util.GateException;
 import gate.test.GATEPluginTests;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import gate.util.GateException;
 
 
 /**
@@ -19,10 +22,16 @@ import static org.junit.Assert.*;
 public class TestOSCAR4 extends GATEPluginTests {
 
   @Test
-  public void testSomething() throws GateException {
+  public void testOSCAR4() throws GateException {
     LanguageAnalyser pr = (LanguageAnalyser)Factory.createResource("gate.creole.oscar4.OSCAR4");
     try {
-      // testing code goes here
+      Document doc = Factory.newDocument("The quick brown ethyl acetate jumps over the lazy bromine.");
+
+      pr.setDocument(doc);
+      pr.execute();
+
+      assertEquals(2, doc.getAnnotations().size());
+
     } finally {
       Factory.deleteResource(pr);
     }

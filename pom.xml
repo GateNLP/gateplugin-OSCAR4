@@ -8,10 +8,14 @@
 		<artifactId>gate-plugin-base</artifactId>
 		<!-- The version of GATE you wish to build against -->
 		<!-- note that this is also the earliest version of GATE which will load your plugin -->
-		<version>9.0</version>
+		<version>9.0.1</version>
 		<!-- This forces the parent to always be resolved from the repo -->
 		<relativePath />
 	</parent>
+
+	<properties>
+		<gate-core.version>9.0</gate-core.version>
+	</properties>
 
 	<!-- The Maven coordinates of this plugin -->
 	<groupId>uk.ac.gate.plugins</groupId>
@@ -22,15 +26,12 @@
 		shown in the GATE plugin manager -->
 
 	<!-- a descriptive short name of the plugin -->
-	<name> </name>
+	<name>OSCAR4</name>
 
 	<!-- Add a description of what the plugin does or can be used for. Do not 
 		include the list of processing or language resources, this will be determined 
 		automatically. About one or two paragraphs. -->
-	<description> </description>
-
-	<!-- Add the URL of the plugin's user-oriented web page -->
-	<url> </url>
+	<description>A chemical named entity tagger based upon OSCAR4</description>
 
 	<licenses>
 		<license>
@@ -43,14 +44,46 @@
 		</license>
 	</licenses>
 
-	<!-- there are plenty of other pieces of useful information you can also 
-		provide here. See the pom.xml reference for full details -->
-
-
 	<dependencies>
 		<!-- Add the Maven coordinates of all libraries this plugin depends on. 
 			The site https://search.maven.org/ can be used to search for libraries and 
 			copy-paste the XML. Any GATE plugins needed at compile
 			time should use "<scope>provided</scope>" -->
+
+			<dependency>
+				<!-- do we really need everything or should we import specific
+				     modules inside of using all? -->
+				<groupId>uk.ac.cam.ch.wwmm.oscar</groupId>
+				<artifactId>oscar4-all</artifactId>
+				<version>5.0.0</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+
+					<!-- exclude stuff that is part of core Java or gate-core -->
+					<exclusion>
+						<groupId>xml-apis</groupId>
+						<artifactId>xml-apis</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>xerces</groupId>
+						<artifactId>xercesImpl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.codehaus.woodstox</groupId>
+						<artifactId>woodstox-core-asl</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>commons-io</groupId>
+						<artifactId>commons-io</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 	</dependencies>
 </project>
