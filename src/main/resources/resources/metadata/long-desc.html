@@ -1,0 +1,17 @@
+<p>This services annotates chemical named entities using the open source <a href="https://github.com/BlueObelisk/oscar4">OSCAR4 tagger</a>.</p>
+
+<p>More details on OSCAR4, including a number of example texts, can be found in <a href="http://dx.doi.org/10.1186/1758-2946-3-41">this publication</a>. One simple example, from that paper would be <i>"The quick brown ethyl acetate jumps over the lazy bromine"</i> which results in two annotations over <i>ethyl acetate</i> and <i>bromine</i>.</p>
+
+<p><button class="btn btn-info" data-toggle="collapse" data-target="#ldAnnotationDetails"><i class="icon-info-sign icon-white"></i> Annotation details</button></p>
+
+<div class="collapse clearfix" id="ldAnnotationDetails">
+THe tagger produces annotations of a single type, namely <tt>ChemicalNE</tt>. These
+annotations have the following features:
+
+<ul>
+	<li><b>type:</b> the type of NE. Usually 'compound'</li>
+	<li><b>Std_InChI:</b> The standard <a href="https://en.wikipedia.org/wiki/International_Chemical_Identifier">International Chemical Identifier</a> for the recognised NE.</li>
+	<li><b>Std_InChiKey:</b> A hashed version of the Std_InChi key useful for web searches etc.</li>
+	<li><b>SMILES:</b> The named entity described using the <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">simplified molecular-input line-entry system (SMILES)</a></li>
+</ul>
+</div>
