@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Deploy') {
             when{
-                branch 'master'
+                branch 'main'
                 expression { currentBuild.currentResult == "SUCCESS" && currentBuild.changeSets != null && currentBuild.changeSets.size() > 0 }
             }
             steps {
