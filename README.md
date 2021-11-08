@@ -1,4 +1,5 @@
-# gateplugin-OSCAR4
+# Chemical Named Entity Recognizer
+
 GATE PR that uses [OSCAR4](https://github.com/BlueObelisk/oscar4) to annotate documents
 
 More details on OSCAR4, including a number of example texts, can be found in [this publication](http://dx.doi.org/10.1186/1758-2946-3-41). One simple example, from that paper would be _"The quick brown ethyl acetate jumps over the lazy bromine"_ which results in two annotations over _ethyl acetate_ and _bromine_.</p>
