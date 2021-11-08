@@ -1,5 +1,6 @@
 package gate.creole.oscar4;
 
+import java.beans.Transient;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +34,7 @@ public class OSCAR4 extends AbstractLanguageAnalyser {
 
 	private static final Logger log = LoggerFactory.getLogger(OSCAR4.class);
 
-	private Oscar oscar;
+	private transient Oscar oscar;
 
 	/**
 	 * Annotation set into which this PR will create new annotations.
@@ -85,9 +86,9 @@ public class OSCAR4 extends AbstractLanguageAnalyser {
 		interrupted = false;
 
 		Document doc = getDocument();
-		AnnotationSet annots = doc.getAnnotations(annotationSetName);
 
 		if (doc != null) {
+			AnnotationSet annots = doc.getAnnotations(annotationSetName);
 
 			List<ResolvedNamedEntity> entities = oscar.findAndResolveNamedEntities(doc.getContent().toString());
 
