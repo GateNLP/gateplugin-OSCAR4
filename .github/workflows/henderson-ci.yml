@@ -43,6 +43,7 @@ jobs:
           files: ./**/target/site/jacoco/jacoco.xml
           name: codecov
           dry_run: true
+          verbose: true
 
       - name: Deploy to repo.gate.ac.uk
         run: mvn -e -Dmaven.test.skip=true source:jar javadoc:jar deploy
