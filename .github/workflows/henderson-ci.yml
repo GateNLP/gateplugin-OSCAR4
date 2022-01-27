@@ -21,6 +21,13 @@ jobs:
           server-id: gate.snapshots
           server-username: MAVEN_USERNAME
           server-password: MAVEN_PASSWORD
+          
+      - name: Cache Maven dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
 
       - name: Build with Maven
         run: mvn -e clean install
@@ -29,6 +36,13 @@ jobs:
         uses: scacap/action-surefire-report@v1
         with:
           fail_if_no_tests: false
+      
+      - name: Publish Jacoco Code Coverage Report
+        uses: codecov/codecov-action@v2
+        with:
+          file: ./**/target/site/jacoco/jacoco.xml
+          name: codecov
+          dry_run: true
 
       - name: Deploy to repo.gate.ac.uk
         run: mvn -e -Dmaven.test.skip=true source:jar javadoc:jar deploy
