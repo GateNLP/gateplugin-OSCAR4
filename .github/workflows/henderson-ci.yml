@@ -37,16 +37,13 @@ jobs:
         with:
           fail_if_no_tests: false
           
-      - name: ls
-        run: ls -alh
-      
-      - name: Publish Jacoco Code Coverage Report
-        uses: codecov/codecov-action@v2
+      - name: Run FindBugs
+        run: mvn -e findbugs:findbugs
+
+      - name: Publish FindBugs Report
+        uses: jwgmeligmeyling/spotbugs-github-action@master
         with:
-          files: ./target/site/jacoco/jacoco.xml
-          name: codecov
-          dry_run: true
-          verbose: true
+          path: '**/findbugsXml.xml'
 
       - name: Deploy to repo.gate.ac.uk
         run: mvn -e -Dmaven.test.skip=true source:jar javadoc:jar deploy
