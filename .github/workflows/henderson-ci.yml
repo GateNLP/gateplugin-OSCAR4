@@ -40,7 +40,7 @@ jobs:
       - name: Publish Jacoco Code Coverage Report
         uses: codecov/codecov-action@v2
         with:
-          file: ./**/target/site/jacoco/jacoco.xml
+          files: ./**/target/site/jacoco/jacoco.xml
           name: codecov
           dry_run: true
 
