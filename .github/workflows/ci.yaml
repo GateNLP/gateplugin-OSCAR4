@@ -30,9 +30,9 @@ jobs:
           cache: maven
 
       # Override http://repo.gate.ac.uk to use https:// instead
-      - uses: s4u/maven-settings-action@v2.8.0
+      - uses: whelk-io/maven-settings-xml-action@v20
         with:
-          mirrors: |
+          mirrors: >
             [
               {
                 "id": "gate.ac.uk-https",
@@ -41,7 +41,22 @@ jobs:
                 "url": "https://repo.gate.ac.uk/content/groups/public/"
               }
             ]
-          servers: |
+          repositories: &central >
+            [
+              {
+                "id": "central",
+                "name": "Maven Central",
+                "url": "https://repo1.maven.org/maven2",
+                "releases": {
+                  "enabled": "true"
+                },
+                "snapshots": {
+                  "enabled": "false"
+                }
+              }
+            ]
+          pluginRepositories: *central
+          servers: >
             [
               {
                 "id": "gate.snapshots",
