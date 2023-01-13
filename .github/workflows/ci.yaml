@@ -21,15 +21,28 @@ jobs:
         with:
           java-version: '8'
           distribution: 'zulu'
-          server-id: gate.snapshots
-          server-username: MAVEN_USERNAME
-          server-password: MAVEN_PASSWORD
           cache: maven
 
       # Override http://repo.gate.ac.uk to use https:// instead
       - uses: s4u/maven-settings-action@v2.8.0
         with:
-          mirrors: '[{"id": "gate.ac.uk-https", "name": "GATE repo (secure)", "mirrorOf": "gate.ac.uk", "url": "https://repo.gate.ac.uk/content/groups/public/"}]'
+          mirrors: |
+            [
+              {
+                "id": "gate.ac.uk-https",
+                "name": "GATE repo (secure)",
+                "mirrorOf": "gate.ac.uk",
+                "url": "https://repo.gate.ac.uk/content/groups/public/"
+              }
+            ]
+          servers: |
+            [
+              {
+                "id": "gate.snapshots",
+                "username": "${{ secrets.GATE_REPO_USERNAME }}",
+                "password": "${{ secrets.GATE_REPO_PASSWORD }}"
+              }
+            ]
 
       - name: Build with Maven
         run: mvn --batch-mode -e clean install 
@@ -55,9 +68,6 @@ jobs:
 
       - name: Deploy to repo.gate.ac.uk
         run: mvn -e -Dmaven.test.skip=true source:jar javadoc:jar deploy
-        env:
-          MAVEN_USERNAME: ${{ secrets.GATE_REPO_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.GATE_REPO_PASSWORD }}
 
       - name: Deploy site to GitHub Pages
         id: deployment
