@@ -42,7 +42,7 @@ jobs:
                 "url": "https://repo.gate.ac.uk/content/groups/public/"
               }
             ]
-          repositories: &central >
+          repositories: >
             [
               {
                 "id": "central",
@@ -56,7 +56,20 @@ jobs:
                 }
               }
             ]
-          pluginRepositories: *central
+          pluginRepositories: > 
+            [
+              {
+                "id": "central",
+                "name": "Maven Central",
+                "url": "https://repo1.maven.org/maven2",
+                "releases": {
+                  "enabled": "true"
+                },
+                "snapshots": {
+                  "enabled": "false"
+                }
+              }
+            ]
           servers: >
             [
               {
